@@ -16,14 +16,15 @@ class TimeStampedMixin(object):
 
 class CatalogueMixin(TimeStampedMixin):
 
-    name = db.Column(db.String(600), nullable=False)
+    name = db.Column(db.String(600), nullable=True)
     is_active = db.Column(db.Boolean())
 
 
-class UserMixin(CatalogueMixin):
+class UserMixin(TimeStampedMixin):
 
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=True)
+    is_active = db.Column(db.Boolean(), default=True)
     login_with_password = True
 
     def set_password(self, password):

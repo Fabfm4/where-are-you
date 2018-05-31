@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from flask_rest_jsonapi import Api
 
-from .user import UserList, UserDetail
+from .users import UserList, UserDetail
 
 
 json_api = Blueprint('api_prefix', __name__, url_prefix='/api/v1')

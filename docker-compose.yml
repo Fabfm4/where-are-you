@@ -19,7 +19,7 @@ services:
         build: .
         hostname: "${PROJECT_NAME}_flask"
         container_name: "${PROJECT_NAME}_flask"
-        command: bash -c "gunicorn --reload ${PROJECT_NAME}:app -b 0.0.0.0:80"
+        command: bash -c "flask run --host=0.0.0.0 --port=80"
         volumes:
             - ./src:/src
             - ./media:/media
@@ -35,6 +35,7 @@ services:
             - C_FORCE_ROOT=true
             - APP_CONFIG_FILE=/src/config/local.py
             - FLASK_APP=${PROJECT_NAME}
+            - FLASK_DEBUG=1
 
     postgresql:
         image: postgres:9.3

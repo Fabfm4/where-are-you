@@ -11,4 +11,7 @@ class UserSchema(Schema):
         self_view_many = 'api_prefix.user_list'
 
     id = fields.Integer(as_string=True, dump_only=True)
-    email = fields.Str()
+    email = fields.Email(required=True)
+    is_active = fields.Boolean(required=False, default=True)
+    created = fields.DateTime(required=False)
+    updated = fields.DateTime(required=False)
