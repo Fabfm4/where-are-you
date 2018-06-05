@@ -31,4 +31,7 @@ class UserMixin(TimeStampedMixin):
         self.password = bcrypt.generate_password_hash(password, 12)
 
     def verify_password(self, password):
-        return bcrypt.check_password_hash(self.password, password)
+        print(password)
+        print(self.password)
+        if self.password:
+            return bcrypt.check_password_hash(self.password, password)

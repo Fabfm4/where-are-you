@@ -12,6 +12,7 @@ class UserSchema(Schema):
 
     id = fields.Integer(as_string=True, dump_only=True)
     email = fields.Email(required=True)
+    password = fields.Str(required=False, dump_only=True, load_only=True)
     is_active = fields.Boolean(required=False, default=True)
     created = fields.DateTime(required=False)
     updated = fields.DateTime(required=False)

@@ -3,7 +3,7 @@ from whereareyou.models.user import User
 
 
 def authenticate(email, password):
-    user = User.query.filter_by(email=email)
+    user = User.query.filter_by(email=email).first()
     if user:
         if user.is_active and user.verify_password(password):
             return user
@@ -15,4 +15,3 @@ def identity(payload):
 
 
 jwt = JWT(None, authenticate, identity)
-
