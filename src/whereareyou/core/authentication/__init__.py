@@ -1,5 +1,6 @@
-from flask_jwt import JWT, current_identity
-from whereareyou.models.user import User
+# -*- coding: utf-8 -*-
+from flask_jwt import JWT
+from ...models.user import User
 
 
 def authenticate(email, password):

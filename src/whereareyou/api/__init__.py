@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Blueprint
 
 from flask_rest_jsonapi import Api

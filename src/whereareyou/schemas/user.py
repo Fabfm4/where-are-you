@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from marshmallow_jsonapi.flask import Schema
 from marshmallow_jsonapi import fields
 

@@ -1,11 +1,12 @@
-from . import models
+# -*- coding: utf-8 -*-
+from ..models import db, TimeStampedMixin, UserMixin
 
 
-class User(models.UserMixin, models.db.Model):
+class User(UserMixin, db.Model):
     pass
 
 
-class UserProfile(models.TimeStampedMixin, models.db.Model):
+class UserProfile(TimeStampedMixin, db.Model):
 
-    user_id = models.db.Column(models.db.Integer, models.db.ForeignKey('user.id'))
-    name = models.db.Column(models.db.String(50))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(50))

@@ -1,10 +1,9 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
 
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 
-bcrypt = Bcrypt()
-db = SQLAlchemy()
+from ..models import bcrypt, db
 
 
 class TimeStampedMixin(object):
@@ -23,15 +22,19 @@ class CatalogueMixin(TimeStampedMixin):
 class UserMixin(TimeStampedMixin):
 
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=True)
+    _password = db.Column(db.Binary(120), nullable=True)
     is_active = db.Column(db.Boolean(), default=True)
     login_with_password = True
 
-    def set_password(self, password):
-        self.password = bcrypt.generate_password_hash(password, 12)
+    @hybrid_property
+    def password(self):
+        return self._password
 
+    @password.setter
+    def password(self, plaintext):
+        self._password = bcrypt.generate_password_hash(plaintext)
+
+    @hybrid_method
     def verify_password(self, password):
-        print(password)
-        print(self.password)
-        if self.password:
-            return bcrypt.check_password_hash(self.password, password)
+        if self._password:
+            return bcrypt.check_password_hash(self._password, password)

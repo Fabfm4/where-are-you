@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from email_validator import validate_email, EmailNotValidError
 from flask_rest_jsonapi.exceptions import InvalidField
 

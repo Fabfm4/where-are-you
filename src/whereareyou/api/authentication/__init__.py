@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 from flask_rest_jsonapi import ResourceList
-from whereareyou.core.authentication.register import UserRegisterSchema, create_object
-from whereareyou.models import models
-from six import with_metaclass
+from whereareyou.core.authentication.register import (
+    before_create_object, UserRegisterSchema
+)
+from whereareyou.models import db
 from whereareyou.models.user import User
-from flask_rest_jsonapi.decorators import check_method_requirements
-from flask import request
 
 
 class UserRegister(ResourceList):
@@ -12,7 +12,7 @@ class UserRegister(ResourceList):
     methods = ['POST']
     schema = UserRegisterSchema
     data_layer = {
-        'session': models.db.session,
+        'session': db.session,
         'model': User,
-        'methods': {'create_object': create_object}
+        'methods': {'before_create_object': before_create_object}
     }
