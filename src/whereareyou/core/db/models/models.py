@@ -25,6 +25,7 @@ class UserMixin(TimeStampedMixin):
     _password = db.Column(db.Binary(120), nullable=True)
     is_active = db.Column(db.Boolean(), default=True)
     login_with_password = True
+    __tablename__ = 'users'
 
     @hybrid_property
     def password(self):
@@ -38,3 +39,21 @@ class UserMixin(TimeStampedMixin):
     def verify_password(self, password):
         if self._password:
             return bcrypt.check_password_hash(self._password, password)
+
+
+class PermissionMixin(CatalogueMixin):
+
+    name = db.Column(db.String(600), unique=True)
+    description = db.Column(db.String(120), nullable=True)
+    is_crud = db.Column(db.Boolean, default=False)
+    __tablename__ = 'permissions'
+
+
+class MatrixPermissionMixin(TimeStampedMixin):
+
+    can_create = db.Column(db.Boolean, default=None, nullable=True)
+    can_list = db.Column(db.Boolean, default=None, nullable=True)
+    can_edit = db.Column(db.Boolean, default=None, nullable=True)
+    can_delete = db.Column(db.Boolean, default=None, nullable=True)
+    can_retrieve = db.Column(db.Boolean, default=None, nullable=True)
+    __tablename__ = 'matrix_permissions'

@@ -1,22 +1,26 @@
 # -*- coding: utf-8 -*-
-from whereareyou.models.user import User
-from whereareyou.schemas.user import UserSchema
+from whereareyou.models.users import User
+from whereareyou.schemas.users import UserSchema
 from whereareyou.models import db
+from flask_jwt import jwt_required
 from whereareyou.core.mixins import ResourceDetailMixin
+from whereareyou.core.authentication import jwt_required_custom
 from whereareyou.api.users.validatorsUsers import UserCreateValidate
 from flask_rest_jsonapi import ResourceDetail, ResourceList
 
 
-class UserList(ResourceList, UserCreateValidate):
+class UserList(ResourceList):
 
-    def before_post(self, *args, **kwargs):
-        super(UserList, self).before_post_mixin(User, *args, **kwargs)
+    @jwt_required_custom(permission='users')
+    def before_get(self, args, kwargs):
+        print("entra")
 
     methods = ['GET']
     schema = UserSchema
     data_layer = {
         'session': db.session,
-        'model': User
+        'model': User,
+        'methods': {'before_get': before_get}
     }
 
 

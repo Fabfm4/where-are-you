@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from marshmallow_jsonapi.flask import Schema
 from marshmallow_jsonapi import fields
-from ...models.user import User
+from ...models.users import User
 from flask_rest_jsonapi.exceptions import InvalidField
 
 

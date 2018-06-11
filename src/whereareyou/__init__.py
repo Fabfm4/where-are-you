@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
 
-from .models import bcrypt, db, user
+from .models import bcrypt, db
 from .api import api
 from .core.authentication import jwt
 

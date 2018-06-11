@@ -4,7 +4,7 @@ from whereareyou.core.authentication.register import (
     before_create_object, UserRegisterSchema
 )
 from whereareyou.models import db
-from whereareyou.models.user import User
+from whereareyou.models.users import User
 
 
 class UserRegister(ResourceList):
