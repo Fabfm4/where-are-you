@@ -45,6 +45,7 @@ class PermissionMixin(CatalogueMixin):
 
     name = db.Column(db.String(600), unique=True)
     description = db.Column(db.String(120), nullable=True)
+    never_delete = db.Column(db.Boolean, default=False, nullable=True)
     is_crud = db.Column(db.Boolean, default=False)
     __tablename__ = 'permissions'
 
@@ -52,8 +53,7 @@ class PermissionMixin(CatalogueMixin):
 class MatrixPermissionMixin(TimeStampedMixin):
 
     can_create = db.Column(db.Boolean, default=None, nullable=True)
-    can_list = db.Column(db.Boolean, default=None, nullable=True)
+    can_view = db.Column(db.Boolean, default=None, nullable=True)
     can_edit = db.Column(db.Boolean, default=None, nullable=True)
     can_delete = db.Column(db.Boolean, default=None, nullable=True)
-    can_retrieve = db.Column(db.Boolean, default=None, nullable=True)
     __tablename__ = 'matrix_permissions'
