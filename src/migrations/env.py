@@ -69,10 +69,14 @@ def run_migrations_online():
                                 prefix='sqlalchemy.',
                                 poolclass=pool.NullPool)
 
+    def include_object(object, name, type_, reflected, compare_to):
+        return not reflected
+
     connection = engine.connect()
     context.configure(connection=connection,
                       target_metadata=target_metadata,
                       process_revision_directives=process_revision_directives,
+                      include_object=include_object,
                       **current_app.extensions['migrate'].configure_args)
 
     try:
